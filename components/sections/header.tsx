@@ -169,10 +169,10 @@ export function Header() {
 
                     {/* Regular buttons for sm+ screens - Not Authenticated */}
                     <div className="hidden sm:flex items-center gap-2 lg:gap-4">
-                      <Link href={`/login`} className="border-black border px-2 py-1 rounded-sm text-sm font-bold text-black hover:text-yellow-400 hover:bg-black/90 transition">
+                      <Link href={`${locale}/login`} className="border-black border px-2 py-1 rounded-sm text-sm font-bold text-black hover:text-yellow-400 hover:bg-black/90 transition">
                         {t('nav.login')}
                       </Link>
-                      <Link href={`/register`} className="text-sm font-bold bg-black px-2 py-1 rounded-sm text-yellow-400 hover:text-yellow-400 hover:bg-black/80 hover:border-black hover:border transition">
+                      <Link href={`${locale}/register`} className="text-sm font-bold bg-black px-2 py-1 rounded-sm text-yellow-400 hover:text-yellow-400 hover:bg-black/80 hover:border-black hover:border transition">
                         {t('nav.register')}
                       </Link>
                     </div>

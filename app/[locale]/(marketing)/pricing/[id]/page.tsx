@@ -42,6 +42,8 @@ const ProductDetailPage = () => {
         return <div>{t('planNotFound')}</div>;
     }
 
+    console.log("/*/*/", session)
+
     const handleCheckout = async () => {
         if (!session) {
             router.push(`/${locale}/login?callbackUrl=${encodeURIComponent(pathname)}`);
