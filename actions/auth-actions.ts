@@ -113,6 +113,7 @@ export async function signInEmail(
         const email = formData.get("email") as string;
         const password = formData.get("password") as string;
         const locale = formData.get("locale") as string || "fr"; // Récupérer la locale
+        const callbackUrl = formData.get("callbackUrl") as string;
 
         // Validation des champs requis
         if (!email || !password) {
@@ -149,7 +150,7 @@ export async function signInEmail(
         } else
 
             // Redirection après connexion réussie (côté serveur pour garantir que les cookies sont définis)
-            redirect(`/${locale}/dashboard`);
+            redirect(callbackUrl || `/${locale}/dashboard`);
     } catch (error: any) {
         console.error("Erreur lors de la connexion:", error);
 

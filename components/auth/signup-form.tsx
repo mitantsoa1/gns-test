@@ -22,17 +22,19 @@ import { useRouter } from "next/navigation"
 import { signInWithProvider } from "./login-form"
 import { Loader2 } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { useLocale } from "next-intl"
 
 export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
   const [state, formAction, isPending] = useActionState(signUpEmail, null)
   const formRef = useRef<HTMLFormElement>(null)
   const router = useRouter();
+  const locale = useLocale()
 
   // Réinitialiser le formulaire après succès
   useEffect(() => {
     if (state?.success) {
       formRef.current?.reset(),
-        router.push(`/login`)
+        router.push(`/${locale}/login`)
     }
   }, [state?.success])
 
@@ -150,7 +152,7 @@ export function SignupForm({ ...props }: React.ComponentProps<typeof Card>) {
                 Sign in with Google
               </Button>
               <FieldDescription className="text-center">
-                Already have an account? <Link href={`/login`}>Sign in</Link>
+                Already have an account? <Link href={`/${locale}/login`}>Sign in</Link>
               </FieldDescription>
             </Field>
 

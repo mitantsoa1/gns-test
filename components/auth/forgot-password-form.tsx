@@ -20,6 +20,7 @@ import { requestPasswordReset } from "@/actions/auth-actions"
 import Link from "next/link"
 import { useActionState, useEffect, useRef } from "react"
 import { Loader2 } from "lucide-react"
+import { useLocale } from "next-intl"
 
 export function ForgotPasswordForm({
     className,
@@ -27,6 +28,7 @@ export function ForgotPasswordForm({
 }: React.ComponentProps<"div">) {
     const [state, formAction, isPending] = useActionState(requestPasswordReset, null)
     const formRef = useRef<HTMLFormElement>(null)
+    const locale = useLocale()
 
     useEffect(() => {
         if (state?.success) {
@@ -82,7 +84,7 @@ export function ForgotPasswordForm({
                                     )}
                                 </Button>
                                 <FieldDescription className="text-center">
-                                    Remember your password? <Link href={`/login`}>Sign in</Link>
+                                    Remember your password? <Link href={`/${locale}/login`}>Sign in</Link>
                                 </FieldDescription>
                             </Field>
                         </FieldGroup>

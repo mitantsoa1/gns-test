@@ -52,7 +52,7 @@ export function NavUser({
     try {
       const result = await signOutAction()
       if (result.success) {
-        router.push(`/login`)
+        router.push(`/${locale}/login`)
         router.refresh()
       }
     } catch (error) {

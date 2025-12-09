@@ -44,7 +44,7 @@ const ProductDetailPage = () => {
 
     const handleCheckout = async () => {
         if (!session) {
-            router.push(`/login?callbackUrl=${encodeURIComponent(pathname)}`);
+            router.push(`/${locale}/login?callbackUrl=${encodeURIComponent(pathname)}`);
             return;
         }
 

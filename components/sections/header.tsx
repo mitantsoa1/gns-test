@@ -154,12 +154,12 @@ export function Header() {
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end" className="bg-[#FFD700]/90 border-black">
                           <DropdownMenuItem asChild>
-                            <Link href={`/login`} className="cursor-pointer font-bold text-black hover:text-yellow-400">
+                            <Link href={`/${locale}/login`} className="cursor-pointer font-bold text-black hover:text-yellow-400">
                               {t('nav.login')}
                             </Link>
                           </DropdownMenuItem>
                           <DropdownMenuItem asChild>
-                            <Link href={`/register`} className="cursor-pointer font-bold text-black hover:text-yellow-400">
+                            <Link href={`/${locale}/register`} className="cursor-pointer font-bold text-black hover:text-yellow-400">
                               {t('nav.register')}
                             </Link>
                           </DropdownMenuItem>

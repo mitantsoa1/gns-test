@@ -1,5 +1,6 @@
 import { getSession } from "@/lib/get-session";
 import { Metadata } from "next";
+import { getLocale } from "next-intl/server";
 import { redirect } from "next/navigation";
 import React from "react";
 
@@ -22,10 +23,11 @@ export default async function ProtectedLayout({
 }) {
     // Vérifier la session utilisateur
     const session = await getSession();
+    const locale = await getLocale();
 
     // Rediriger vers la page de connexion si non authentifié
     if (!session?.user) {
-        redirect(`/login`);
+        redirect(`/${locale}/login`);
     }
 
     return <>{children}</>;

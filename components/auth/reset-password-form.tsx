@@ -22,6 +22,7 @@ import { startTransition, useActionState, useEffect, useRef, useState } from "re
 import { Loader2 } from "lucide-react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { z } from "zod";
+import { useLocale } from "next-intl"
 
 export const ResetPasswordSchema = z.object({
     password: z
@@ -50,6 +51,7 @@ export function ResetPasswordForm({
     const searchParams = useSearchParams()
     const token = searchParams.get("token")
     const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({})
+    const locale = useLocale()
 
     const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
@@ -105,7 +107,7 @@ export function ResetPasswordForm({
         if (state?.success) {
             // Redirect to login page after 2 seconds
             setTimeout(() => {
-                router.push("/login")
+                router.push(`/${locale}/login`)
             }, 2000)
         }
     }, [state?.success, router])
@@ -208,7 +210,7 @@ export function ResetPasswordForm({
                                 </Button>
                                 <FieldDescription className="text-center">
                                     Vous vous souvenez de votre mot de passe ?{" "}
-                                    <Link href="/login" className="text-primary hover:underline">
+                                    <Link href={`/${locale}/login`} className="text-primary hover:underline">
                                         Se connecter
                                     </Link>
                                 </FieldDescription>
