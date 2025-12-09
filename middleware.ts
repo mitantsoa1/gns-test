@@ -10,11 +10,14 @@ export default function middleware(request: NextRequest) {
   if (request.nextUrl.pathname.startsWith('/api/auth')) {
     return NextResponse.next();
   }
+  if (request.nextUrl.pathname.startsWith('/api/stripe')) {
+    return NextResponse.next();
+  }
 
   // Appliquer le middleware next-intl pour toutes les autres routes
   return intlMiddleware(request);
 }
 
 export const config = {
-  matcher: ['/', '/(fr|en)/:path*', '/api/auth/:path*']
+  matcher: ['/', '/(fr|en)/:path*', '/api/auth/:path*', '/api/stripe/:path*']
 };
