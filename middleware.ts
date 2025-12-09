@@ -10,7 +10,7 @@ export default function middleware(request: NextRequest) {
   if (request.nextUrl.pathname.startsWith('/api/auth')) {
     return NextResponse.next();
   }
-  if (request.nextUrl.pathname.startsWith('/api/stripe')) {
+  if (request.nextUrl.pathname.startsWith('/api/stripe/webhook')) {
     return NextResponse.next();
   }
 
@@ -19,5 +19,5 @@ export default function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/', '/(fr|en)/:path*', '/api/auth/:path*', '/api/stripe/:path*']
+  matcher: ['/', '/(fr|en)/:path*', '/api/auth/:path*', '/api/stripe/webhook/:path*']
 };
