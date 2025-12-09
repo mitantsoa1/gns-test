@@ -19,6 +19,7 @@ import { Input } from "@/components/ui/input"
 import { signInEmail } from "@/actions/auth-actions"
 import Link from "next/link"
 import { useActionState, useEffect, useRef } from "react"
+import { useSearchParams } from "next/navigation"
 import { Loader2 } from "lucide-react"
 import { signIn } from "@/lib/auth-client"
 import { useLocale } from "next-intl"
@@ -39,6 +40,7 @@ export function LoginForm({
 }: React.ComponentProps<"div">) {
   const [state, formAction, isPending] = useActionState(signInEmail, null)
   const formRef = useRef<HTMLFormElement>(null)
+  const searchParams = useSearchParams()
 
   useEffect(() => {
     if (state?.success) {
@@ -61,6 +63,7 @@ export function LoginForm({
           <FieldGroup>
             <form action={formAction} ref={formRef}>
               <div className="flex flex-col gap-4 mb-4">
+                <input type="hidden" name="callbackUrl" value={searchParams.get("callbackUrl") || ""} />
                 {/* Message d'erreur */}
                 {/* Message de succès */}
                 {state?.success && (

@@ -13,11 +13,10 @@ export default function middleware(request: NextRequest) {
   if (request.nextUrl.pathname.startsWith('/api/stripe/webhook')) {
     return NextResponse.next();
   }
-
   // Appliquer le middleware next-intl pour toutes les autres routes
   return intlMiddleware(request);
 }
 
 export const config = {
-  matcher: ['/', '/(fr|en)/:path*', '/api/auth/:path*', '/api/stripe/webhook/:path*']
+  matcher: ['/((?!api|_next|.*\\..*).*)']
 };

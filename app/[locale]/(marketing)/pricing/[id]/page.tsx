@@ -1,13 +1,13 @@
 "use client"
 import { useLocale, useTranslations } from 'next-intl';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams, useRouter, usePathname } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import ButtonText from '@/components/ButtonText';
 import { useProductStore } from '@/store/product-store';
 import { getProductById } from '@/actions/product-actions';
 import { Product } from '@/lib/generated/prisma/client';
-import { loadStripe, Stripe } from '@stripe/stripe-js';
 import { toast } from 'sonner';
+import { useSession } from '@/lib/auth-client';
 
 const ProductDetailPage = () => {
     const { id: productId } = useParams<{ id: string }>();
@@ -18,6 +18,8 @@ const ProductDetailPage = () => {
     const [loading, setLoading] = useState(!selectedProduct);
     const [isStripeLoading, setIsStripeLoading] = useState(false);
     const locale = useLocale()
+    const { data: session } = useSession();
+    const pathname = usePathname();
 
     useEffect(() => {
         if (!selectedProduct || selectedProduct.id !== productId) {
@@ -41,6 +43,11 @@ const ProductDetailPage = () => {
     }
 
     const handleCheckout = async () => {
+        if (!session) {
+            router.push(`/login?callbackUrl=${encodeURIComponent(pathname)}`);
+            return;
+        }
+
         setIsStripeLoading(true);
         try {
 
